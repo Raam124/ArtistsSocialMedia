@@ -1,0 +1,93 @@
+{% extends 'images/base.html' %}
+
+
+{% block content %}
+{% include 'images/navbar.html' %}
+
+{% comment %} account update success messasge {% endcomment %}
+
+{% for message in messages %}
+<h3 {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</h3>
+    {% endfor %}
+
+    {% comment %} account update success messasge {% endcomment %}
+
+    <div class="top-container">
+        <h3> Hello {{request.user}}!</h3>
+        {% if not user.profile.profile_photo %}
+        <a class="create-btn" href="{% url 'account' %}">Customize Your Profile </a>
+        {% endif %}
+    </div>
+
+    <div class="header" id="myHeader">
+        <div class="category">
+            {{category_filter.form.category}}
+        </div>
+        <div class="tag-form-main">
+            <form method="get" class="tag-form">
+                <input type="search" placeholder='Search by Tags' name="tags__name" class="tag-search" />
+                <!-- {{ filter.form.tags__name }} -->
+                <button type="submit" class="tag-btn"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card-columns" id="myItems" style="flex-wrap: wrap;">
+
+            {% for post in page_obj %}
+            <div class="card-body p-0">
+                <div class="card border-0">
+                    <a href="{% url 'picture_detail' post.slug %}">
+                        <img alt="" class="card-img img-fluid geeks" id="geeks" src="{{post.image.url}}" />
+                    </a>
+                    <div class="post-title">
+                        <h2>{{post.title}}</h2>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="mypaginator">
+        <ul class="pagination mt-2 px-3 py-1">
+
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1{{new_request}}">&laquo;</a></li>
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}{{ new_request }}">&lsaquo;</a></li>
+            {% endif %}
+
+            <li class="page-item"><a class="page-link" href="#"> {{ page_obj.number }} of
+                    {{ page_obj.paginator.num_pages }}</a></li>
+
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ page_obj.next_page_number }}{{ new_request }}">&rsaquo;</a></li>
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ page_obj.paginator.num_pages }}{{ new_request }}">&raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset + 50 > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+
+    {% endblock content %}

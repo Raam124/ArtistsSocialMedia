@@ -1,0 +1,55 @@
+{% extends 'images/base.html' %}
+{% load static %}
+{% block mystyles %}
+<link rel="stylesheet" href={% static 'css/login.css' %}>
+{% endblock mystyles %}
+{% block content %}
+<!-- <form class="create-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+	{{form.as_p}}
+	<button type="submit">Submit</button>
+</form> -->
+
+<div id="main-container">
+	<section class="auth-sidebar">
+		<div class="auth-sidebar-content">
+			<header>
+				<a href="#" class="logo"></a>
+				<h1>Discover the world’s top Designers &amp; Creatives.</h1>
+			</header>
+		</div>
+	</section>
+	<section class="content">
+		<main>
+			<div class="auth-content">
+				<h2>Update Post to Drawild</h2>
+				<hr>
+				<div class="auth-form signup-form">
+					<div class="form-container sign-up-container">
+						<form class="create-form" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class="form-field">
+								{% for field in form %}
+								<fieldset>
+									{{field.label_tag}}
+									{{field}}
+									{% for error in field.errors%}
+									<small style="color: red;">{{error}}</small>
+									{% endfor %}
+									<br>
+									{% if field.help_text %}
+									<small style="color: grey;">{{field.help_text}}</small>
+									{% endif %}
+								</fieldset>
+								{% endfor %}
+							</div>
+							<button type="submit">Save Changes</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</main>
+	</section>
+</div>
+{% endblock content %}

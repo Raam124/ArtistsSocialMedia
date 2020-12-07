@@ -1,0 +1,36 @@
+/* css for navbar */
+
+.social-part .fab {
+    padding-right: 20px;
+}
+
+ul li a {
+    margin-right: 20px;
+}
+
+.nav-user-link {
+    display: inline-block;
+    padding: .3rem;
+}
+
+/* .social-part{
+        width: 80%;
+    } */
+
+.nav-user-link .fas {
+    font-size: 15px;
+    color: #0d1a1f;
+    padding: 0.8rem;
+    z-index: 5;
+    background-color: #e2e2e2;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.fas:hover {
+    background-color: #cecdcd;
+}
+
+
+/*css for navbar end */

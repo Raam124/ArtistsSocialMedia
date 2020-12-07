@@ -1,0 +1,7 @@
+{% for user in users  %}
+
+
+
+<a href="{% url 'user_profile' user.username %}">{{user.username}}</a>
+
+{% endfor %}

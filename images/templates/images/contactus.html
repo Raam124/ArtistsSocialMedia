@@ -1,0 +1,61 @@
+{% extends 'wildarts/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block mystyles %}
+    <link rel="stylesheet" href={% static 'css/about_us.css' %}>
+    {% endblock mystyles %}
+{% block content %}
+{% include 'wildarts/navbar.html' %}
+<div class="about-wrapper">
+    <div class="about-body">
+        <h3 class="title">- Be Connected -</h3>
+        <br>
+        <div class="info" style="text-align: center;">
+            <div class="social-part">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div class="about-body">
+        <h1 class="title">Contact Us</h1>
+        <br>
+        {% if messages %}
+        <h4 class="title" style="color: #4F8A10;">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </h4>
+        {% endif %}
+        <div class="contact-info">
+            <form method="post" class="myform">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        {{form.name|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        {{form.email|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        {{form.message|as_crispy_field}}
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        <input type="submit" name="Submit" class="btn btn-sm" >
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

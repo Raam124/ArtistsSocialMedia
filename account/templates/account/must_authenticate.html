@@ -1,0 +1,45 @@
+{% extends 'images/base.html' %}
+
+{% block content %}
+<style>
+	.auth-container {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.auth-block {
+		display: flex;
+		flex-direction: column;
+		width: fit-content;
+		margin: auto;
+		/* margin-top: auto; */
+		text-align: center;
+		height: 80%;
+		justify-content: center;
+	}
+
+	p.auth-header {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 5px;
+	}
+
+	.auth-block a {
+		width: fit-content;
+		margin: 0 auto;
+		justify-content: center;
+	}
+
+</style>
+
+<div class="auth-container">
+	<div class="auth-block">
+		<p class="auth-header">You must authenticate to view this page. </p>
+		<a href="{% url 'register' %}" class="create-btn">Create an account</a>
+		<p class="auth-header"> or </p>
+		<a href="{% url 'login' %}" class="create-btn">login</a>
+
+	</div>
+</div>
+
+{% endblock content %}

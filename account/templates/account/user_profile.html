@@ -1,0 +1,86 @@
+{% extends 'images/base.html' %}
+{% block content %}
+{% include 'images/navbar.html' %}
+<div id="main-container-profile">
+    <section class="profile-sidebar">
+        <div class="profile-card-4 text-center">
+            {% if user.profile.profile_photo %}
+            <img src="{{user.profile.profile_photo.url}}" class="img img-responsive">
+            {% else %}
+            <img src="https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"
+                class="img img-responsive">
+            {% endif %}
+            <div class="profile-detail-content">
+                <div class="profile-name">{{user.username}}
+                    <!-- <p>@johndoedesigner</p> -->
+                </div>
+                <div class="profile-description">{{user.profile.seld_description}}</div>
+
+                <div class="profile-count">
+                    <div class="profile-overview">
+                        <h4>{{images_count}}</h4>
+                        <p>ARTS</p>
+                    </div>
+                    <div class="profile-overview">
+                        <h4>{{karma}}</h4>
+                        <p>KARMA</p>
+                    </div>
+                    <!-- <div class="profile-overview">
+                        <h4>168</h4>
+                        <p>FOLLOWING</p>
+                    </div> -->
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <section class="profile-content">
+        {% if images %}
+        <div class="more-title">
+            <h2>My Arts</h2>
+        </div>
+        <div class="card-columns my-0" id="myItems">
+            {% for pic in images%}
+            <div class="card-body p-0">
+                <div class="card border-0">
+                    <a href="{% url 'picture_detail' pic.slug %}">
+                        <img alt="" class="card-img img-fluid geeks" id="geeks" src="{{pic.image.url}}" />
+                    </a>
+                    <div class="post-title">
+                        <h2>{{pic.title}}</h2>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="more-title">
+            <h2>you dont have <br> <a href="{% url 'create_image_post' %}">Create one here</a></h2>
+        </div>
+        {% endif %}
+    </section>
+</div>
+
+
+
+{% comment %} test codes {% endcomment %}
+
+    
+
+   <!-- karma:{{karma}} -->
+
+
+{% comment %} Test codes {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+

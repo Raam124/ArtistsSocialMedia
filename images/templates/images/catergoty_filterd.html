@@ -1,0 +1,14 @@
+
+
+{% block content %}
+
+    {% for filter in category_filter.qs  %}
+    
+    <a href="{{filter.category}}">category</a>
+        
+    {% endfor %}
+   
+     {% for obj in catergory_filter.qs %}
+        {{ obj.title }}<br />
+    {% endfor %}
+{% endblock %}

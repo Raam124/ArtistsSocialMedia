@@ -1,0 +1,9 @@
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for search_result in filter.qs %}
+    <li>{{ search_result.title }} - {{ search_result.author }}</li>
+  {% endfor %}
+  </ul>

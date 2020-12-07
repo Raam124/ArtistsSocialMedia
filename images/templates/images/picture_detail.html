@@ -1,0 +1,243 @@
+{% extends 'images/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'images/navbar.html' %}
+
+
+
+<div class="main-container">
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <a class="back" onclick="goBack()"><i class="fas fa-chevron-left"></i></a>
+    <div class="wrapper">
+        <div class="product-img">
+            <img id="geeks" src="{{picture_detail.image.url}}">
+        </div>
+        <div class="product-info">
+            <div class="product-text">
+
+                {% comment %} user likes {% endcomment %}
+
+
+
+
+
+
+
+
+                {% with total_likes=picture_detail.users_like.count  users_like=picture_detail.users_like.all %}
+                <!-- Button trigger modal -->
+                <a data-toggle="modal" data-target="#likeModalCenter">
+                    <div class="image-info">
+                        <div>
+                            <span class="count">
+                                <span class="total">{{ total_likes }}</span>
+                                &nbsp; Vote{{ total_likes|pluralize }}
+                            </span>
+                            <a href="#" data-id="{{ picture_detail.id }}"
+                                data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">
+                                {% if request.user not in users_like %}
+                                <i class="fa fa-arrow-up"></i>
+                                {% else %}
+                                <i class="fa fa-arrow-down"></i>
+                                {% endif %}
+
+                            </a>
+
+
+
+
+                        </div>
+
+                    </div>
+                </a>
+                <!-- Modal -->
+                <div class="modal fade" id="likeModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="likeModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content like-modal">
+                            <div class="modal-header">
+                                <h6 class="modal-title1" id="likeModalCenterTitle">Liked People</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="image-likes">
+                                {% for user in users_like %}
+                                {% if user.profile.profile_photo %}
+                                {% if user == request.user  %}
+                                <a class="nav-user-link" href="{% url 'profile' %}">
+                                    <img src="{{user.profile.profile_photo.url}}" class="pro-pic">
+                                    <p>{{ user.username }}</p>
+                                </a><br>
+                                {% else %}
+                                <a class="nav-user-link" href="{% url 'user_profile' user.username %}">
+                                    <img src="{{user.profile.profile_photo.url}}" class="pro-pic">
+                                    <p>{{ user.username }}</p>
+                                </a><br>
+                                {% endif %}
+
+                                {% else %}
+                                {% if user == request.user  %}
+                                <a class="nav-user-link" href="{% url 'profile' %}">
+                                    <img src="https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg
+                                " class="pro-pic">
+                                    <p>{{ user.username }}</p>
+                                </a><br>
+                                {% else %}
+                                <a class="nav-user-link" href="{% url 'user_profile' user.username %}">
+                                    <img src="https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg
+                                                                " class="pro-pic">
+                                    <p>{{ user.username }}</p>
+                                </a><br>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                {% endwith %}
+
+
+                {% comment %} user likes {% endcomment %}
+
+                <h1>{{picture_detail.title}}</h1>
+                {% if picture_detail.author == request.user  %}
+                <h2>Author : <a href="{% url 'profile' %}">{{picture_detail.author}}</a></h2>
+                {% else %}
+                <h2>Author : <a href="{% url 'user_profile' picture_detail.author %}">{{picture_detail.author}}</a></h2>
+                {% endif %}
+
+
+
+
+
+
+
+                <h5>{{picture_detail.date_published}}</h5>
+                <hr>
+                <p class="detail">
+                    <span style="font-weight: bold;">Tags</span>
+                </p>
+                <p class="detail-d" style="float: left;">
+                    {{ picture_detail.tags.all|join:", " }}
+                </p>
+                {% if picture_detail.author == request.user %}
+
+                <a href="{% url 'edit_image_post_view' picture_detail.slug %}" class="edit-btn"><i
+                        class="fas fa-pen"></i></a>
+
+                <form method="POST" class="delete-form" action="{% url 'delete_image_post_view' picture_detail.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
+                </form>
+
+                {% endif %}
+            </div>
+        </div>
+
+        {% if messages %}
+        <span class="badge badge-pill badge-danger mybadge">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </span>
+        {% endif %}
+        {% if not message %}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger btn-sm py-0 mybtn" data-toggle="modal"
+            data-target="#reportModalCenter" id="mybtn">
+            Report Art
+        </button>
+        {% endif %}
+        <!-- Modal -->
+        <div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="reportModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalCenterTitle">Report Art</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% comment %} <form method="post">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            {{reportform.reason|as_crispy_field}}
+                        </div>
+                        <div class="modal-footer">
+                            <input type="Submit" name="Report" class="btn btn-outline-danger btn-sm r-btn">
+                        </div>
+                    </form> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid m-0">
+    <div class="more-title">
+        <h2>More Like This</h2>
+    </div>
+    <div class="card-columns " id="myItems">
+        {% for pic in similar_pictures%}
+        <div class="card-body p-0">
+            <div class="card border-0">
+                <a href="{% url 'picture_detail' pic.slug %}">
+                    <img alt="" class="card-img img-fluid geeks" id="geeks" src="{{pic.image.url}}" />
+                </a>
+                <div class="post-title">
+                    <h2>{{pic.title}}</h2>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+<script>
+    {% block domready %}
+
+    $('a.like').click(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.post('{% url "like" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function (data) {
+                if (data['status'] == 'ok') {
+                    var previous_action = $('a.like').data('action');
+                    $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+                    $('a.like').html(previous_action == 'like' ? '<i class="fa fa-arrow-down"></i>' : '<i class="fa fa-arrow-up"></i>');
+                    var previous_likes = parseInt($('span.count .total').text());
+                    $('span.count .total').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+                }
+            }
+        );
+    });
+
+
+    {% endblock domready %}
+</script>
+
+
+
+
+
+{% endblock content %}

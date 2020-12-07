@@ -1,0 +1,79 @@
+{% extends 'images/base.html' %}
+{% load static %}
+{% block mystyles %}
+<link rel="stylesheet" href={% static 'css/login.css' %}>
+{% endblock mystyles %}
+{% block content %}
+<!-- <form class="form-signin" method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required
+        autofocus>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+
+</form> -->
+
+<div id="main-container">
+    <section class="auth-sidebar">
+        <div class="auth-sidebar-content">
+            <header>
+                <a href="#" class="logo"></a>
+                <h1>Discover the world’s top Designers &amp; Creatives.</h1>
+            </header>
+        </div>
+    </section>
+    <section class="content">
+        <nav class="auth-nav">
+            <p class="auth-link">
+                Not a member? <a href="{% url 'register' %}">Sign up now</a>
+            </p>
+        </nav>
+        <main>
+            <div class="auth-content">
+                <h2>Sign In to Drawild</h2>
+                <div class="auth-connections">
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <hr class="divider">
+                {% if messages %}
+                {% for message in messages %}
+                <small style="color: red;">{{message}}</small>
+                {% endfor %}
+                {% endif %}
+                <div class="auth-form signup-form">
+                    <div class="form-container sign-up-container">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-field">
+                                <fieldset class="user_email">
+                                    <label for="inputEmail">Email</label>
+                                    <input type="email" name="email" id="inputEmail" required autofocus>
+                                </fieldset>
+                            </div>
+                            <div class="form-field">
+                                <fieldset class="user_password">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" name="password" id="inputPassword" required>
+                                </fieldset>
+                            </div>
+                            <button type="submit">Sign in</button>
+                            <p class="auth-link-mobile">
+                                Not a member? <a href="{% url 'register' %}">Sign up now</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+</div>
+
+
+
+{% endblock content %}

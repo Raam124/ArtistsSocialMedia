@@ -1,0 +1,52 @@
+{% extends 'images/base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-sm   navbar-light bg-light sticky-top">
+    <a class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="{% url 'about_us' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contactus' %}">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'terms_of_use' %}">Terms of Use</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'privacy_policy' %}">Privacy &amp; policy</a>
+            </li> {% endcomment %}
+        </ul>
+    </div>
+
+    <div class="social-part">
+        <!-- <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+        <i class="fab fa-instagram" aria-hidden="true"></i> -->
+        <a class="nav-user-link create-btn" href="{% url 'create_image_post' %}">Upload Art</a>
+        {% if request.user.is_authenticated %}
+        {% if request.user.profile.profile_photo %}
+        <a class="nav-user-link" href="{% url 'profile' %}"><img src="{{request.user.profile.profile_photo.url}}"
+                class="pro-pic"></a>
+
+        {% else %}
+        <a class="nav-user-link" href="{% url 'profile' %}"><img src="https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg
+" class="pro-pic"></a>
+        {% endif %}
+
+        <a class="nav-user-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+        {% endif %}
+        {% if not request.user.is_authenticated %}
+        <a class="nav-user-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i></a>
+        <a class="nav-user-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock content %}

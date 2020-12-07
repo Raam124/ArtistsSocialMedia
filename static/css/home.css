@@ -1,0 +1,380 @@
+:root {
+	--bg-color: white;
+	--card-color: white;
+	--card-footer-color: #c3c4c3;
+	--search-bar-color: #cbcdce;
+	--dark-letter-color: #242423;
+	--menu-bar-color: #212529;
+}
+
+/* html {
+	width: 100%;
+	overflow-x: hidden;
+} */
+
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	background-color: var(--bg-color);
+}
+
+a, a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+.pro-pic {
+	font-size: 15px;
+	color: #0d1a1f;
+	z-index: 5;
+	background-color: #e2e2e2;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	/* object-fit: cover; */
+}
+
+.create-btn {
+	border-radius: 20px;
+	border: 1px solid #FF4B2B;
+	background-color: #FF4B2B;
+	color: #FFFFFF;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 0.3rem 20px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	margin-bottom: 10px;
+}
+
+.create-btn:hover {
+	color: #ffffff;
+	transform: scale(1.05);
+}
+
+.create-btn:active {
+	transform: scale(0.95);
+}
+
+.create-btn:focus {
+	outline: none;
+}
+
+.post-title h2 {
+	margin: 0 10px;
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: capitalize;
+	color: black;
+	/* padding-bottom: 0.5rem; */
+}
+
+.more-title h2 {
+	margin: 18px;
+	font-size: 21px;
+	font-weight: 700;
+	text-transform: capitalize;
+	color: black;
+	padding-bottom: 0.5rem;
+	text-align: center;
+}
+
+.top-container {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.header {
+	padding: 10px 0;
+	z-index: 10;
+	background: inherit;
+}
+
+.container-fluid {
+	padding: 16px;
+}
+
+.sticky {
+	position: fixed;
+	top: 50px;
+	width: 100%;
+}
+
+.sticky+.container-fluid {
+	padding-top: 180px;
+}
+
+.top-container .create-btn {
+	margin: auto 20px;
+}
+
+.top-container h3 {
+	font-size: 20px;
+	color: black;
+	font-weight: bolder;
+	text-transform: capitalize;
+}
+
+.tags {
+	margin: 0 18px;
+	margin-bottom: 10px;
+}
+
+.tags a {
+	font-size: 0.6rem;
+	margin: 1.5px 0;
+	margin-right: 3px;
+}
+
+.tag-search {
+	width: 96%;
+	background: white;
+	border-radius: 50px;
+	font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 40px;
+	padding: 10px 16px;
+	outline: none;
+	-webkit-transition: border-color 200ms ease, outline 200ms ease, color 200ms ease, -webkit-box-shadow 200ms ease;
+	transition: border-color 200ms ease, outline 200ms ease, color 200ms ease, -webkit-box-shadow 200ms ease;
+	transition: border-color 200ms ease, outline 200ms ease, color 200ms ease, box-shadow 200ms ease;
+	transition: border-color 200ms ease, outline 200ms ease, color 200ms ease, box-shadow 200ms ease, -webkit-box-shadow 200ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	color: #0d0c22;
+	background-color: #f3f3f4;
+	border: 1px solid transparent;
+}
+
+.tag-search:focus {
+	outline: none;
+	background-color: #fff;
+	border-color: rgba(234, 76, 137, 0.4) !important;
+	-webkit-box-shadow: 0 0 0 4px rgba(234, 76, 137, 0.1) !important;
+	box-shadow: 0 0 0 4px rgba(234, 76, 137, 0.1) !important;
+}
+
+.tag-search:hover {
+	background-color: #fff;
+	border-color: rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 0 4px rgba(234, 76, 137, 0.1);
+	box-shadow: 0 0 0 4px rgba(234, 76, 137, 0.1);
+}
+
+.tag-form-main {
+	/* position: fixed;
+	top: 170px;
+	left: 0; */
+	/* transform: translate(-50%, -10%); */
+	width: 100%;
+	padding: 15px;
+	margin: 0 auto;
+	background: inherit;
+	z-index: 10;
+}
+
+.tag-form {
+	width: 80%;
+	margin: auto;
+	padding: 5px;
+	background: #efefef;
+	border-radius: 50px;
+}
+
+.tag-btn {
+	border: none;
+	background: transparent;
+	padding: 0 5px;
+	margin: auto;
+}
+
+.category {
+	/* position: fixed;
+	top: 110px;
+	left: 0; */
+	width: 100%;
+	padding: 15px 0;
+	overflow-y: scroll;
+	height: auto;
+	margin: auto;
+	z-index: 10;
+	background: inherit;
+}
+
+.category ul {
+	padding: 5px;
+	list-style: none;
+	width: max-content;
+}
+
+.category::-webkit-scrollbar {
+	display: none;
+}
+
+.category {
+	-ms-overflow-style: none;
+	/* IE and Edge */
+	scrollbar-width: none;
+	/* Firefox */
+}
+
+.category ul li {
+	float: left;
+	padding: .1rem .65rem .2rem;
+	margin: auto 2px;
+	border-radius: 3rem;
+}
+
+.category ul li:first-child {
+	display: none;
+}
+
+.category ul li:nth-child(7n-6) {
+	background-color: lightgreen;
+}
+
+.category ul li:nth-child(7n-5) {
+	background-color: lightcoral;
+}
+
+.category ul li:nth-child(7n-4) {
+	background-color: lightskyblue;
+}
+
+.category ul li:nth-child(7n-3) {
+	background-color: lightsalmon;
+}
+
+.category ul li:nth-child(7n-2) {
+	background-color: lightseagreen;
+}
+
+.category ul li:nth-child(7n-1) {
+	background-color: lightslategray;
+}
+
+.category ul li:nth-child(7n) {
+	background-color: lightpink;
+}
+
+.category ul li a {
+	text-align: center;
+	margin: auto 10px;
+	padding: 0 10px;
+	color: white !important;
+}
+
+@media only screen and (max-width: 1300px) {
+	.tag-form {
+		width: 90%;
+	}
+}
+
+@media only screen and (max-width: 1130px) {
+	.tag-search {
+		width: 93%;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.tag-search {
+		width: 90%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.tag-search {
+		width: 80%;
+	}
+	.category ul {
+		margin: auto;
+	}
+}
+
+img {
+	height: auto;
+	width: auto;
+	margin: auto;
+}
+
+.card-img {
+	border-radius: 1rem !important;
+	padding: 2%;
+}
+
+.card-columns {
+	margin-right: 2%;
+	margin: auto;
+	max-width: 96%;
+}
+
+#myItems {
+	column-count: 5;
+}
+
+@media only screen and (max-width: 1030px) {
+	#myItems {
+		column-count: 3;
+	}
+	.card-columns .card {
+		display: inline-block;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	#myItems {
+		column-count: 2;
+		column-gap: 1;
+	}
+	.card-columns .card {
+		display: inline-block;
+	}
+}
+
+.container-fluid {
+	background-color: var(--bg-color);
+	overflow-x: hidden;
+	/* margin-top: 200px; */
+	height: fit-content;
+}
+
+/* 100% Image Width on Smaller Screens */
+
+@media only screen and (max-width: 900px) {
+	.card-columns {
+		max-width: 95%;
+	}
+	.card-columns .card {
+		display: inline-block;
+	}
+}
+
+/* message style */
+
+p.success {
+	font-size: 16px;
+	font-weight: 500;
+	color: #FF4B2B;
+	text-align: center;
+}
+
+h3.success {
+	font-size: 16px;
+	font-weight: 500;
+	color: #FF4B2B;
+	text-align: center;
+}
+
+/* message style */
