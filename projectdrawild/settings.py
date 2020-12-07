@@ -25,7 +25,7 @@ SECRET_KEY = 'q6n)jmcr)0g-j+3tel6fa1p+f3zpq_f1rxywo1s$ugwfr^7hy%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['afternoon-sands-72998.herokuapp.com']
+ALLOWED_HOSTS = ['fierce-waters-63765.herokuapp.com']
 
 
 LOGIN_URL = 'must_authenticate'
